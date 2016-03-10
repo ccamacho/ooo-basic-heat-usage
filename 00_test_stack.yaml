@@ -1,0 +1,29 @@
+heat_template_version: 2013-05-23
+
+#Test with: `heat stack-create my_first_stack -f 00_test_stack.yaml`
+# The cirros image must exist
+# The nova network must be created first
+# from tripleo.sh
+#neutron net-create nova --shared --router:external=True --provider:network_type flat \
+#  --provider:physical_network datacentre
+#    FLOATING_IP_CIDR=${FLOATING_IP_CIDR:-"192.0.2.0/24"}
+#    FLOATING_IP_START=${FLOATING_IP_START:-"192.0.2.50"}
+#    FLOATING_IP_END=${FLOATING_IP_END:-"192.0.2.64"}
+#    EXTERNAL_NETWORK_GATEWAY=${EXTERNAL_NETWORK_GATEWAY:-"192.0.2.1"}
+#    TENANT_STACK_DEPLOY_ARGS=${TENANT_STACK_DEPLOY_ARGS:-""}
+#    neutron subnet-create --name ext-subnet --allocation-pool start=$FLOATING_IP_START,end=$FLOATING_IP_END --disable-dhcp --gateway $EXTERNAL_NETWORK_GATEWAY nova $FLOATING_IP_CIDR
+#Show after creation `heat stack-show my_first_stack`
+
+
+
+
+description: Simple template to deploy a single compute instance
+
+resources:
+  my_instance:
+    type: OS::Nova::Server
+    properties:
+      image: cirros-0.3.4-x86_64
+      flavor: m1.small
+      networks:
+        - network: nova
